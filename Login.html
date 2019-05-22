@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <title>Login</title>
+<script type="text/javascript" src="instascan.min.js"></script>
 <style id="applicationStylesheet" type="text/css">
 	body {
 		margin: 0;
@@ -1908,6 +1909,24 @@ window.application = application;
 	</div>
 	<div id="forgot_password_">
 		<span>forgot password?</span>
+	</div>
+	<div class="qrscan">
+		<video id="preview"></video>
+    <script type="text/javascript">
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content) {
+        console.log(content);
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>
 	</div>
 </div>
 </div>
