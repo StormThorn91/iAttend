@@ -1921,6 +1921,7 @@ window.application = application;
       scanner.addListener('scan', function (content) {
 	 scanQR.setAttribute("src", content)
 	      confirm.innerHTML = "YOUR ATTENDANCE HAS BEEN RECORDED"
+	      alert(content)
         //window.open(content, "_self")
       });
       Instascan.Camera.getCameras().then(function (cameras) {
