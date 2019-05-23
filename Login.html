@@ -1914,10 +1914,10 @@ window.application = application;
 <div class="qrscan">
 <video id="preview"></video>
     <script>
-    
+    var scanQR = document.createElement("iframe");
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
-	 
+	 scanQR.setAttribute("src", content)
         //window.open(content, "_self")
       });
       Instascan.Camera.getCameras().then(function (cameras) {
@@ -1930,8 +1930,7 @@ window.application = application;
         console.error(e);
       });
 	    function prepareIframe() {
-		      var scanQR = document.createElement("iframe");
-     
+		      
         scanQR.style.width = "640px";
         scanQR.style.height = "480px";
         document.body.appendChild(scanQR);
