@@ -1915,6 +1915,34 @@ window.application = application;
 <video id="preview"></video>
 	<p id="confirmation">...</p>
     <script>
+	    //FIREBASE CONFIGURATIONS
+	    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyACCuOwFZCR_-pjj53puO5YmymKM3pdngs",
+    authDomain: "iattend-4b494.firebaseapp.com",
+    databaseURL: "https://iattend-4b494.firebaseio.com",
+    projectId: "iattend-4b494",
+    storageBucket: "iattend-4b494.appspot.com",
+    messagingSenderId: "37193368388",
+    appId: "1:37193368388:web:e2617c9ea6f6dfa0"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+	
+function writeData(studentID)
+	firebase.database().ref(studentID)({
+		recorded: "True"
+	
+	})
+	}
+	    
+	    
+	    
     var scanQR = document.createElement("iframe");
 	    var confirm = document.getElementById('confirmation');
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
@@ -1922,6 +1950,8 @@ window.application = application;
 	 scanQR.setAttribute("src", content)
 	      if(content.includes("https://docs.google.com/forms/d/e/1FAIpQLSdwd3wHb1vhwdFaKC6bhYKcUwLpfCzYburqaQuvqF3t9_gQcw/formResponse")){
 	      confirm.innerHTML = "YOUR ATTENDANCE HAS BEEN RECORDED"
+		
+		writeData("201531441")
 		 }
 		else{
 		 confirm.innerHTML = "INVALID QR CODE"
