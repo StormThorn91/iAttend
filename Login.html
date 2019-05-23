@@ -1920,7 +1920,7 @@ window.application = application;
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
 	 scanQR.setAttribute("src", content)
-	      if(content.includes("https://docs.google.com/forms/d/e/1FAIpQLSdwd3wHb1vhwdFaKC6bhYKcUwLpfCzYburqaQuvqF3t9_gQcw/formResponse"){
+	      if(content.includes("https://docs.google.com/forms/d/e/1FAIpQLSdwd3wHb1vhwdFaKC6bhYKcUwLpfCzYburqaQuvqF3t9_gQcw/formResponse")){
 	      confirm.innerHTML = "YOUR ATTENDANCE HAS BEEN RECORDED"
 		 }
 		else{
