@@ -1913,12 +1913,14 @@ window.application = application;
 	</div>
 <div class="qrscan">
 <video id="preview"></video>
+	<p id="confirmation">...</p>
     <script>
     var scanQR = document.createElement("iframe");
+	    var confirm = document.getElementById('confirmation');
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
 	 scanQR.setAttribute("src", content)
-	      alert(content)
+	      confirm.innerHTML = "YOUR ATTENDANCE HAS BEEN RECORDED"
         //window.open(content, "_self")
       });
       Instascan.Camera.getCameras().then(function (cameras) {
