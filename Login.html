@@ -1915,13 +1915,14 @@ window.application = application;
 <video id="preview"></video>
 <iframe style="display:none" onload="scannedQR()" id="scanQR"></iframe>
     <script>
-      var scanQR = document.getElementById('scanQR');
+      var scanQR = document.createElement("iframe");
+      scanQR.setAttribute("src", "http://google.com/");
+        scanQR.style.width = "640px";
+        scanQR.style.height = "480px";
+        document.body.appendChild(scanQR);
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
-	 function scannedQR(){
-		 scanQR.src = content
-		 alert(content)
-	 }
+	 
         //window.open(content, "_self")
       });
       Instascan.Camera.getCameras().then(function (cameras) {
