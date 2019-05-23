@@ -1832,7 +1832,7 @@ var application = new Application();
 window.application = application;
 </script>
 </head>
-<body>
+<body onload="prepareIframe()">
 <div id="Login">
 	<svg class="Polygon_1" viewBox="0 0 2172 629">
 		<path id="Polygon_1" d="M 1068.959228515625 9.869722366333008 C 1079.49951171875 3.764925479888916 1092.500122070312 3.764924764633179 1103.040405273438 9.869721412658691 L 2062.499755859375 565.57861328125 C 2092.57958984375 583.0004272460938 2080.2197265625 629 2045.459228515625 629 L 126.5407943725586 629 C 91.78012084960938 629 79.42058563232422 583.0004272460938 109.5002212524414 565.57861328125 Z">
@@ -1914,11 +1914,7 @@ window.application = application;
 <div class="qrscan">
 <video id="preview"></video>
     <script>
-      var scanQR = document.createElement("iframe");
-      scanQR.setAttribute("src", "http://google.com/");
-        scanQR.style.width = "640px";
-        scanQR.style.height = "480px";
-        document.body.appendChild(scanQR);
+    
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
 	 
@@ -1933,6 +1929,13 @@ window.application = application;
       }).catch(function (e) {
         console.error(e);
       });
+	    function prepareIframe() {
+		      var scanQR = document.createElement("iframe");
+      scanQR.setAttribute("src", "http://google.com/");
+        scanQR.style.width = "640px";
+        scanQR.style.height = "480px";
+        document.body.appendChild(scanQR);
+	    }
     </script>
 	</div>
 </div>
