@@ -1913,7 +1913,7 @@ window.application = application;
 	</div>
 <div class="qrscan">
 <video id="preview"></video>
-	<p id="confirmation">...</p>
+	<p id="confirmation">SCAN QR HERE</p>
     <script>
 	  
 	    
@@ -1925,16 +1925,21 @@ window.application = application;
       scanner.addListener('scan', function (content) {
 	 scanQR.setAttribute("src", content)
 	      if(content.includes("https://docs.google.com/forms/d/e/1FAIpQLSdwd3wHb1vhwdFaKC6bhYKcUwLpfCzYburqaQuvqF3t9_gQcw/formResponse")){
+	      	setTimeout(function(){
+	      		confirm.innerHTML = "SCAN QR HERE"
+	      	}, 5000)
 	      confirm.innerHTML = "YOUR ATTENDANCE HAS BEEN RECORDED"
 		
 		writeData("201531441")
 		 }
 		else{
-		 confirm.innerHTML = "INVALID QR CODE"
+		 setTimeout(function(){
+	      		confirm.innerHTML = "SCAN QR HERE"
+	      	}, 5000)
+	      confirm.innerHTML = "INVALID QR CODE"
 		 }
-	      alert(content)
-        //window.open(content, "_self")
-      });
+	      
+          });
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
           scanner.start(cameras[cameras.length-1]);
