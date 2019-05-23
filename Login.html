@@ -4,6 +4,9 @@
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <title>Login</title>
+<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js">
+</script>
+<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-database.js"></script>
 <script type="text/javascript" src="instascan.min.js"></script>
 <style id="applicationStylesheet" type="text/css">
 	body {
@@ -1915,22 +1918,24 @@ window.application = application;
 <video id="preview"></video>
 	<p id="confirmation">SCAN QR HERE</p>
     <script>
-	  
-	    
-	    
-	    
+	 //QR SCANNER PROPER
     var scanQR = document.createElement("iframe");
 	    var confirm = document.getElementById('confirmation');
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
-	 scanQR.setAttribute("src", content)
-	      if(content.includes("https://docs.google.com/forms/d/e/1FAIpQLSdwd3wHb1vhwdFaKC6bhYKcUwLpfCzYburqaQuvqF3t9_gQcw/formResponse")){
+      	//READ ALL DATA IN DB
+	      var ref = firebase.database().ref("Students")
+	      ref.once("value").then(function(snapshot){
+	      	if(snapshot.child("2015123456").val() == null){ //the student number must be dynamically read through the session of the login.
+	 			scanQR.setAttribute("src", content)
+
+	 			if(content.includes("https://docs.google.com/forms/d/e/1FAIpQLSdwd3wHb1vhwdFaKC6bhYKcUwLpfCzYburqaQuvqF3t9_gQcw/formResponse")){
 	      	setTimeout(function(){
 	      		confirm.innerHTML = "SCAN QR HERE"
 	      	}, 5000)
-	      confirm.innerHTML = "YOUR ATTENDANCE HAS BEEN RECORDED"
+	      confirm.innerHTML = "WELCOME TO CLASS"
+	      writeData("2015123456", content)
 		
-		writeData("201531441")
 		 }
 		else{
 		 setTimeout(function(){
@@ -1938,6 +1943,15 @@ window.application = application;
 	      	}, 5000)
 	      confirm.innerHTML = "INVALID QR CODE"
 		 }
+	      	}
+	      else{
+	      	setTimeout(function(){
+	      		confirm.innerHTML = "SCAN QR HERE"
+	      	}, 5000)
+	      confirm.innerHTML = "YOU'VE ALREADY HAD YOUR ATTENDANCE RECORDED"
+	      }
+	     })
+	      
 	      
           });
       Instascan.Camera.getCameras().then(function (cameras) {
@@ -1954,6 +1968,39 @@ window.application = application;
         scanQR.style.display = "none"
         document.body.appendChild(scanQR);
 	    }
+
+	    //FIREBASE PROPER
+	    // Your web app's Firebase configuration
+  	var firebaseConfig = {
+    	apiKey: "AIzaSyACCuOwFZCR_-pjj53puO5YmymKM3pdngs",
+    	authDomain: "iattend-4b494.firebaseapp.com",
+    	databaseURL: "https://iattend-4b494.firebaseio.com",
+    	projectId: "iattend-4b494",
+    	storageBucket: "iattend-4b494.appspot.com",
+    	messagingSenderId: "37193368388",
+    	appId: "1:37193368388:web:e2617c9ea6f6dfa0"
+  };
+  		// Initialize Firebase
+  		firebase.initializeApp(firebaseConfig);
+
+  		function writeData(studentID, content){
+  			var db = firebase.database();
+  			firebase.database().ref("Students").child(studentID).set({
+  				recorded: "true",
+  				data: content
+  			})
+  			alert("I got here")
+  		}
+
+  		function success(data){
+  			console.log(data.val())
+  		}
+
+  		function error (err){
+  			console.log("Error!")
+  			console.log(err)
+  		}
+
     </script>
 	</div>
 </div>
