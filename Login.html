@@ -1988,8 +1988,8 @@ window.application = application;
   			var db = firebase.database();
   			firebase.database().ref("AttendanceRecorded").child(studentID).set({
   				recorded: "true",
-  				data: content
-  				timestamp: Date.now().toString()
+  				data: content,
+  				timestamp: Date.now()
   			})
   			alert("I got here")
   		}
