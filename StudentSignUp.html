@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign up</title>
+	<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-database.js"></script>
+	<script type="text/javascript" src="StudentSignUp.js"></script>
+</head>
+<body onload="configFirebase()">
+	<form>
+		<input type="number" id="SID" placeholder="Student Number" required>
+		<input type="password" id="pass" placeholder="Password"required>
+		<input type="text"id="FirstName" placeholder="First Name"required>
+		<input type="text"id="MiddleName" placeholder="Middle Name" required>
+		<input type="text"id="LastName" placeholder="Last Name" required>
+		<input type="text"id="CYS" placeholder="CYS" required>
+		<br>
+		<button onclick="getData()">Submit</button>
+	</form>
+</html>
