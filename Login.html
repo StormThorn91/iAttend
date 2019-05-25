@@ -1986,9 +1986,10 @@ window.application = application;
 
   		function writeData(studentID, content){
   			var db = firebase.database();
-  			firebase.database().ref("Students").child(studentID).set({
+  			firebase.database().ref("AttendanceRecorded").child(studentID).set({
   				recorded: "true",
   				data: content
+  				timestamp: Date.now().toString()
   			})
   			alert("I got here")
   		}
